@@ -38,7 +38,7 @@ function covegg_init() {
 function covegg_page_handler($page) {
 	if ( isset($page[0]) && isset($page[1]) ){
 		set_input('username', $page[0]);
-		require(elgg_get_plugins_path() . 'covegg/pages/edit.php');
+		require(elgg_get_plugins_path() . 'covegg/pages/covegg/edit.php');
 	}
 }
 

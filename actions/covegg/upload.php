@@ -22,12 +22,13 @@ if ($resized) {
 	//@todo Make these actual entities.  See exts #348.
 	$file = new ElggFile();
 	$file->owner_guid = $guid;
-	$file->setFilename("profile/{$guid}{$name}.jpg");
+	$file->setFilename("cover.jpg");
 	$file->open('write');
 	$file->write($resized);
 	$file->close();
 
-	$owner->cover = $file->getFilenameOnFilestore();
+	$owner->cover = "cover/{$guid}{$name}.jpg";
+
    	if ( ! $owner->save()) {
 		register_error(elgg_echo('covegg:upload:fail'));
 		forward(REFERER);
