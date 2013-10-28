@@ -27,7 +27,7 @@ if ($resized) {
 	$file->write($resized);
 	$file->close();
 
-	$owner->cover = "cover/{$guid}{$name}.jpg";
+	$owner->cover = time();
 
    	if ( ! $owner->save()) {
 		register_error(elgg_echo('covegg:upload:fail'));
@@ -45,4 +45,4 @@ $view = 'river/user/default/profilecoverupdate';
 elgg_delete_river(array('subject_guid' => $owner->guid, 'view' => $view));
 add_to_river($view, 'update', $owner->guid, $owner->guid);
 
-forward(REFERER);
+forward('profile/' . $owner->username);

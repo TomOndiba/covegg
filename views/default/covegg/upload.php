@@ -1,10 +1,13 @@
 <?php
+$user = $vars['entity'];
 if (isset($vars['entity']->cover)) {
+	$cover_url = str_replace("profile/icondirect.php", "covegg/view.php", $user->getIcon() . "&etag={$user->cover}");
 	$user_cover = elgg_view(
 							'output/img',
 							array(
-								  'src' => $vars['entity']->cover,
+								  'src' => $cover_url,
 								  'alt' => elgg_echo('cover'),
+								  'height' => "100px"
 								  )
 							);
 }
@@ -21,7 +24,7 @@ if ($vars['entity']->cover) {
 		'title' => elgg_echo('covegg:remove'),
 		'href' => 'action/covegg/remove?guid=' . elgg_get_page_owner_guid(),
 		'is_action' => true,
-		'class' => 'elgg-button elgg-button-cancel mll',
+		'class' => 'elgg-button elgg-button-cancel',
 	));
 }
 
@@ -30,24 +33,21 @@ $upload_form = elgg_view_form('covegg/upload', $form_params, $vars);
 
 ?>
 
-<p class="mtm">
+<p>
 	<?php echo elgg_echo('covegg:upload:instructions'); ?>
 </p>
 
-<?php
-
-$image = <<<HTML
-<div id="current-user-cover" class="mrl prl">
-	<label>$current_label</label><br />
-	$user_cover
+<div class="row">
+	<div class="span8">
+	    <label><?php echo $current_label?></label><br />
+	    <?php echo $user_cover;
+	    echo $remove_button
+         ?>
+	</div>
 </div>
-$remove_button
-HTML;
-
-$body = <<<HTML
-<div id="cover-upload">
-	$upload_form
+<br />
+<div class="row">
+	<div id="cover-upload" class="span8">
+	<?php echo $upload_form?>
+	</div>
 </div>
-HTML;
-
-echo elgg_view_image_block($image, $upload_form);

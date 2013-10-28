@@ -11,9 +11,17 @@ require_once(dirname(dirname(dirname(__FILE__))). '/engine/settings.php');
 
 global $CONFIG;
 
+// won't be able to serve anything if no joindate or guid
+if (!isset($_GET['joindate']) || !isset($_GET['guid'])) {
+	header("HTTP/1.1 404 Not Found");
+	exit;
+}
+
 $join_date = (int)$_GET['joindate'];
 $last_cache = (int)$_GET['lastcache']; // icontime
 $guid = (int)$_GET['guid'];
+
+$etag = (int)$_GET['etag'];
 
 $mysql_dblink = @mysql_connect($CONFIG->dbhost, $CONFIG->dbuser, $CONFIG->dbpass, true);
 if ($mysql_dblink) {
@@ -45,6 +53,7 @@ if ($mysql_dblink) {
 				header("Pragma: public");
 				header("Cache-Control: public");
 				header("Content-Length: $size");
+				header("ETag: \"$etag\"");
 
 				readfile($filename);
 				exit;
