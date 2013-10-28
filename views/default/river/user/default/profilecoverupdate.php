@@ -11,11 +11,18 @@ $subject_link = elgg_view('output/url', array(
 
 $string = elgg_echo('covegg:update:user:cover', array($subject_link));
 
+$cover_url = str_replace("profile/icondirect.php", "covegg/view.php", $subject->getIcon() . "&etag={$subject->cover}");
+$user_cover = elgg_view(
+						'output/img',
+						array(
+							  'src' => $cover_url,
+							  'alt' => elgg_echo('cover'),
+							  'height' => "100px"
+							  )
+						);
+
 echo elgg_view('river/elements/layout', array(
 	'item' => $vars['item'],
 	'summary' => $string,
-	'attachments' => elgg_view_entity_icon($subject, 'tiny', array(
-		'use_hover' => false,
-		'use_link' => false,
-	)),
+	'attachments' => $user_cover,
 ));

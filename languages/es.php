@@ -8,6 +8,7 @@ $spanish = array(
 				 'covegg:current' => 'Portada actual: ',
 				 'covegg:upload' => 'Subir imagen',
 				 'covegg:upload:success' => 'Tienes una nueva portada',
+				 'covegg:update:user:cover' => '%s tiene una nueva portada.'
 				 );
 
 add_translation('es', $spanish);

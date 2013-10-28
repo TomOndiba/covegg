@@ -8,6 +8,7 @@ $english = array(
 				 'covegg:current' => 'Current cover',
 				 'covegg:upload' => 'Upload your new cover',
 				 'covegg:upload:success' => 'Your cover has been uploaded',
+				 'covegg:update:user:cover' => '%s has a new cover',
 				 );
 
 add_translation('en', $english);
